@@ -1,0 +1,18 @@
+{% extends "projects/base.html" %}
+{% block header %}
+  <h1>Выберите проекты, которые желаете добавить</h1>
+{% endblock header %}
+{% block content %}
+<form action="{% url 'workers:add_tasks' emp.id %}" method="post" class="form">
+    {% csrf_token %}
+{% for task in form.task %}
+{% if task not in emp.tasks.all %}
+    <h4>
+        <input type="checkbox" name="task" value="{{task.id}}" id="id_task_{{task.id}}">
+      {{ task.text }}
+    </h4>
+{% endif %}
+{% endfor %}
+    <button name="submit">Сохранить изменения</button>
+    </form>
+{% endblock content %}

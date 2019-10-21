@@ -1,0 +1,38 @@
+{% extends "projects/base.html" %}
+{% block content %}
+<h2><b> Проект: </b> {{ task.text }}</h2>
+<form action="{% url 'projects:read_task' task.id %}" method='get'>
+    {% csrf_token %}
+
+
+
+   <h3><b>Название проекта:</b> {{task.text}}</h3>
+  <table cellpadding="15" cellspacing="15" border="0" align="left" >
+    <tr>
+      <td width="500">
+
+
+
+        <h4><b>Уникальный номер проекта:</b> {{task.name1}}</h4>
+        <p><b>Фонд</b> {{task.fond}}</p>
+        <p><b>Основание для проведения проекта</b> {{task.foundation}}</p>
+        <p><b>Дата начала проекта:</b> {{task.start}}</p>
+        <p><b>Дата окончания проекта:</b>{{task.finish}}</p>
+        <p><b>Тип проекта (НИР, ОКР, ...)</b> {{task.pr_type}}</p>
+      </td>
+      <td width="500">
+        <h4><b>Полная сумма проекта:</b> {{task.pr_cost}}</h4>
+        <p><b>Организация:</b> {{task.pr_org}}</p>
+        <p><b>Соисполнители</b> {{task.pr_also}}</p>
+        <p><b>Примечания</b> {{task.pr_notes}}</p>
+        <p><b>Комментарии</b> {{task.pr_comments}}</p>
+      </td>
+    </tr>
+  </table>
+
+
+
+  </form>
+
+
+{% endblock content %}

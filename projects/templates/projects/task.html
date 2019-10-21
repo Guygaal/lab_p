@@ -1,0 +1,99 @@
+{% extends 'projects/base.html' %}
+
+{% block header %}
+  <h2>{{ task.text }}</h2>
+<h4><a href="{% url 'projects:read_task' task.id %}">Подробная информация</a> </h4>
+{% endblock header %}
+{% block content %}
+<h2>Руководители</h2>
+
+ <table cellpadding="15" cellspacing="15" border="0" align="center" >
+    <tr>
+      <td width="600">
+{% for emp in task.emp_set.all %}
+          {% if emp.leader %}
+<h2>
+ <a href="{% url 'workers:emp' emp.id %}">{{ emp.text }}  {{emp.name1}}</a>
+</h2>
+          {% endif %}
+{% endfor %}
+      </td>
+      <td width="600">
+       {% for emp in task.emp_set.all %}
+          {% if emp.leader %}
+<form action="{% url 'projects:rem_emps' emp.id task.id %}" method="post" class="form">
+        {% csrf_token %}
+  <h2></h2>
+      <button name="submit">Удалить из проекта</button>
+
+</form>
+          {% endif %}
+        {% endfor %}
+      </td>
+        <td width="600">
+       {% for emp in task.emp_set.all %}
+            {% if emp.leader %}
+<form action="{% url 'projects:make_leader' emp.id task.id %}" method="post" class="form">
+        {% csrf_token %}
+  <h2></h2>
+      <button name="submit">Убрать руководство</button>
+
+</form>
+            {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+ </table>
+
+<h2>Исполнители</h2>
+
+ <table cellpadding="15" cellspacing="15" border="0" align="center" >
+    <tr>
+      <td width="600">
+{% for emp in task.emp_set.all %}
+          {% if not emp.leader %}
+<h2>
+<<<<<<< HEAD
+ <a href="{% url 'workers:emp' emp.id %}">{{ emp.text }} {{emp.name1}}</a>
+=======
+ <a href="{% url 'workers:emp' emp.id %}">{{ emp.text }}  {{emp.name1}}</a>
+>>>>>>> c5b5bdb6d6299434d21280762647d098e50c7ab5
+</h2>
+          {% endif %}
+{% endfor %}
+      </td>
+      <td width="600">
+       {% for emp in task.emp_set.all %}
+          {% if not emp.leader %}
+<form action="{% url 'projects:rem_emps' emp.id task.id %}" method="post" class="form">
+        {% csrf_token %}
+  <h2></h2>
+      <button name="submit">Удалить из проекта</button>
+
+</form>
+          {% endif %}
+        {% endfor %}
+      </td>
+        <td width="600">
+       {% for emp in task.emp_set.all %}
+            {% if not emp.leader %}
+<form action="{% url 'projects:make_leader' emp.id task.id %}" method="post" class="form">
+        {% csrf_token %}
+  <h2></h2>
+      <button name="submit">Сделать руководителем</button>
+
+</form>
+            {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+ </table>
+<h3><a href="{% url 'projects:add_emps' task.id %}">Добавить исполнителя</a></h3>
+
+
+<p></p>
+<p></p>
+<!-- Сюда можно включить шаблон с результатами через include
+      Или выделить для него отдельный блок -->
+
+{% endblock content %}

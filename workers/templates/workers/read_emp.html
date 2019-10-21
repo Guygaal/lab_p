@@ -1,0 +1,37 @@
+{% extends "projects/base.html" %}
+{% block content %}
+<h2><b> Исполнитель: </b>{{ emp.text }} {{emp.name1}} {{emp.name2}}</h2>
+<form action="{% url 'workers:read_emp' emp.id %}" method='get'>
+    {% csrf_token %}
+
+
+
+   <h3><b>Фамилия:</b> {{emp.text}}</h3>
+  <table cellpadding="15" cellspacing="15" border="0" align="left" >
+    <tr>
+      <td width="500">
+
+
+
+        <h4><b>Имя:</b> {{emp.name1}}</h4>
+        <p><b>Отчество:</b> {{emp.name2}}</p>
+        <p><b>SPIN:</b> {{emp.spin}}</p>
+        <p><b>Researcher ID:</b> {{emp.res_id}}</p>
+        <p><b>Идентификатор учёного в ИС:</b> {{emp.sc_id}}</p>
+
+      </td>
+      <td width="500">
+          <h4><p><b>ИНН:</b> {{emp.inn}}</p></h4>
+        <b>СНИЛС:</b> {{emp.snils}}
+        <p><b>Дата рождения:</b> {{emp.birthday}}</p>
+        <p><b>Паспорт:</b> {{emp.passport}}</p>
+      </td>
+    </tr>
+  </table>
+
+
+
+  </form>
+
+
+{% endblock content %}

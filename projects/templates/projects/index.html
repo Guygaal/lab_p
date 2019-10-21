@@ -1,0 +1,14 @@
+{% block header %}
+  <div class='jumbotron'>
+    <h1>Сохраните свои записи.</h1>
+  </div>
+{% endblock header %}
+{% block content %}
+  {% if user.is_authenticated %}
+  <meta http-equiv="Refresh" content="0; {% url 'projects:tasks' %}" />
+  {% else %}
+  <h2>
+    <a href="{% url 'users:register' %}">Зарегистрируйте пользователя</a> чтобы начать работу или нажмите <a href="{% url 'users:login' %}">вход</a>
+  </h2>
+  {% endif %}
+{% endblock content %}

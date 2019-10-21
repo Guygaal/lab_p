@@ -1,0 +1,38 @@
+{% extends 'projects/base.html' %}
+
+{% block header %}
+  <h2>{{ emp.text }}</h2>
+<h4><a href="{% url 'workers:read_emp' emp.id %}">Подробная информация</a> </h4>
+{% endblock header %}
+{% block content %}
+<h2>Проекты</h2>
+<table cellpadding="15" cellspacing="15" border="0" align="center" >
+    <tr>
+      <td width="600">
+{% for task in emp.tasks.all %}
+<h2>
+ <a href="{% url 'projects:task' task.id %}">{{ task.text }}</a>
+</h2>
+{% endfor %}
+      </td>
+        <td width="600">
+                  {% for task in emp.tasks.all %}
+<form action="{% url 'workers:rem_tasks' emp.id task.id %}" method="post" class="form">
+        {% csrf_token %}
+  <h2></h2>
+      <button name="submit">Удалить проект</button>
+
+</form>
+        {% endfor %}
+      </td>
+    </tr>
+</table>
+
+<h3><a href="{% url 'workers:add_tasks' emp.id %}">Добавить проект</a></h3>
+
+<p></p>
+<p></p>
+<!-- Сюда можно включить шаблон с результатами через include
+      Или выделить для него отдельный блок -->
+
+{% endblock content %}
